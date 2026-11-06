@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Sekolah Model - SDN 011 Balikpapan Tengah</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & Smooth Transitions */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .page-fade {
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+        }
+        
+        .pulse-dot {
+            animation: pulseRing 2s infinite;
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
+
+    <!-- Sidebar Backdrop (Mobile & Tablet) -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden lg:hidden transition-opacity"></div>
+
+    <!-- Layout Wrapper -->
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR NAVIGATION (Collapsible on Desktop & Mobile) -->
+        <aside id="sidebar" class="fixed top-0 left-0 z-50 w-80 h-screen bg-white dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800 flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-xl lg:shadow-none">
+            
+            <!-- Brand Header -->
+            <div class="p-5 border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white">
+                <div class="flex items-center gap-3.5 cursor-pointer" onclick="navigateTo('beranda')">
+                    <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-inner shrink-0">
+                        <i class="fa-solid fa-graduation-cap text-2xl text-amber-300"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-slate-950 rounded-full">Sekolah Model</span>
+                        </div>
+                        <h1 class="font-display font-bold text-base leading-tight mt-1">SDN 011 Balikpapan Tengah</h1>
+                        <p class="text-[11px] text-blue-200">Portofolio Transformasi Pendidikan</p>
+                    </div>
+                </div>
+                <button onclick="toggleSidebar()" title="Sembunyikan Menu Samping" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+                    <i class="fa-solid fa-angles-left text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Sidebar Quick Search -->
+            <div class="p-3.5 border-b border-slate-100 dark:border-slate-800/80">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input id="menuSearchInput" type="text" oninput="filterSidebarMenus(this.value)" placeholder="Cari menu atau dokumen..." 
+                        class="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition">
+                </div>
+            </div>
+
+            <!-- Navigation Links Container -->
+            <div class="flex-1 overflow-y-auto px-3 py-3 space-y-1" id="sidebarNavContainer">
+                <!-- Populated dynamically by JS -->
+            </div>
+
+            <!-- Visitor Counter Widget in Sidebar Footer -->
+            <div class="p-4 border-t border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/50">
+                <div class="p-3.5 rounded-2xl bg-gradient-to-r from-slate-900 to-blue-950 text-white shadow-md">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-blue-200 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+                            Pengunjung Riil (Live)
+                        </span>
+                        <i class="fa-solid fa-chart-line text-amber-400 text-xs"></i>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-white/10">
+                        <div>
+                            <p class="text-[10px] text-slate-300">Total Kunjungan</p>
+                            <p id="sidebarTotalVisitors" class="font-display font-bold text-lg text-white">...</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-300">Hari Ini</p>
+                            <p id="sidebarTodayVisitors" class="font-display font-bold text-lg text-emerald-400">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <div id="mainWrapper" class="flex-1 flex flex-col min-w-0 lg:pl-80 transition-all duration-300 ease-in-out">
+
+            <!-- STICKY TOP NAVBAR -->
+            <header class="sticky top-0 z-30 glass-header border-b border-slate-200/80 dark:border-slate-800 px-4 sm:px-8 py-3.5">
+                <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                    
+                    <!-- Left: Sidebar Toggle Button (All Screens) & Breadcrumb -->
+                    <div class="flex items-center gap-3 min-w-0">
+                        <button onclick="toggleSidebar()" title="Tampilkan / Sembunyikan Menu Samping" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-slate-700 transition flex items-center gap-2 text-xs font-semibold border border-slate-200/70 dark:border-slate-700">
+                            <i id="sidebarToggleIcon" class="fa-solid fa-bars-staggered text-sm"></i>
+                            <span id="sidebarToggleText" class="hidden sm:inline">Menu</span>
+                        </button>
+                        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs sm:text-sm truncate">
+                            <button onclick="navigateTo('beranda')" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-house text-xs"></i>
+                                <span class="hidden sm:inline">Beranda</span>
+                            </button>
+                            <span class="text-slate-300 dark:text-slate-600">/</span>
+                            <span id="topBreadcrumbCurrent" class="font-semibold text-blue-700 dark:text-blue-400 truncate">Dashboard Utama</span>
+                        </nav>
+                    </div>
+
+                    <!-- Right: Quick Actions, Visitor Counter Pill, Theme Toggle -->
+                    <div class="flex items-center gap-2.5">
+                        <!-- Live Visitor Badge -->
+                        <button onclick="openVisitorModal()" title="Lihat Detail Statistik Pengunjung Riil" class="hidden sm:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/70 text-emerald-800 dark:text-emerald-300 text-xs font-medium hover:bg-emerald-100 transition">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+                            <span>Pengunjung Riil: <strong id="headerVisitorCount" class="font-bold">...</strong></span>
+                        </button>
+
+                        <!-- Dark Mode Button -->
+                        <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Ubah Mode Tampilan">
+                            <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- DYNAMIC VIEW CONTAINER -->
+            <main id="mainContent" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-6 sm:py-8">
+                <!-- Content rendered dynamically via JavaScript -->
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 px-4 sm:px-8 py-6 mt-12">
+                <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">011</div>
+                        <div>
+                            <p class="font-semibold text-slate-700 dark:text-slate-200">SDN 011 Balikpapan Tengah</p>
+                            <p>Portofolio Digital Implementasi Sekolah Model &bull; Kota Balikpapan, Kalimantan Timur</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="navigateTo('beranda')" class="hover:text-blue-600 transition">Beranda</button>
+                        <span>&bull;</span>
+                        <button onclick="openVisitorModal()" class="hover:text-blue-600 transition">Statistik Pengunjung</button>
+                        <span>&bull;</span>
+                        <span>&copy; 2026 Tim Pengembang Sekolah Model</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- MODAL 1: LIVE PREVIEW (DOKUMEN GOOGLE DRIVE / SLIDES / DOCS / YOUTUBE) -->
+    <div id="previewModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-5xl w-full h-[86vh] flex flex-col shadow-2xl overflow-hidden animate-fadeIn">
+            <!-- Modal Header -->
+            <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 bg-slate-50 dark:bg-slate-800/50">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div id="previewModalIcon" class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-file-lines text-lg"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <span id="previewModalBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">Pratinjau Dokumen</span>
+                        <h3 id="previewModalTitle" class="font-display font-bold text-sm sm:text-base text-slate-900 dark:text-white truncate mt-0.5">Judul Dokumen</h3>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <a id="previewExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-2 shadow-xs transition">
+                        <span>Buka di Tab Baru</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                    </a>
+                    <button onclick="closePreviewModal()" class="w-9 h-9 rounded-xl bg-slate-200/70 dark:bg-slate-700 hover:bg-rose-100 hover:text-rose-600 dark:hover:bg-rose-950 dark:hover:text-rose-400 flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Modal Iframe Container -->
+            <div class="flex-1 bg-slate-100 dark:bg-slate-950 relative">
+                <div id="previewLoading" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-500">
+                    <i class="fa-solid fa-circle-notch fa-spin text-3xl text-blue-600"></i>
+                    <p class="text-xs font-medium">Memuat pratinjau dokumen/video...</p>
+                </div>
+                <iframe id="previewIframe" src="" class="w-full h-full border-0 relative z-10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="document.getElementById('previewLoading').classList.add('hidden')"></iframe>
+            </div>
+            <!-- Modal Footer Notice -->
+            <div class="px-5 py-2.5 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                <span><i class="fa-solid fa-circle-info text-blue-500 mr-1"></i> Jika dokumen tidak tampil karena pembatasan izin Google Drive/YouTube, silakan klik tombol <strong>"Buka di Tab Baru"</strong> di kanan atas.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL STATISTIK PENGUNJUNG -->
+    <div id="visitorModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl page-fade">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">Data Pengunjung Riil (Real-Time)</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Tercatat langsung dari akses nyata ke situs web</p>
+                    </div>
+                </div>
+                <button onclick="closeVisitorModal()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 my-5">
+                <div class="p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900">
+                    <span class="text-xs text-blue-600 dark:text-blue-400 font-medium">Total Kunjungan Riil</span>
+                    <p id="modalTotalVisitors" class="font-display font-extrabold text-2xl text-slate-900 dark:text-white mt-1">0</p>
+                    <span class="text-[11px] text-emerald-600 font-semibold"><i class="fa-solid fa-cloud-bolt mr-1"></i>Data Cloud Nyata</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-900">
+                    <span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Kunjungan Hari Ini</span>
+                    <p id="modalTodayVisitors" class="font-display font-extrabold text-2xl text-slate-900 dark:text-white mt-1">0</p>
+                    <span class="text-[11px] text-emerald-600 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Real-Time Aktif</span>
+                </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl">
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Pengunjung Unik (Perangkat/User)</span>
+                    <span id="modalUniqueVisitors" class="font-semibold text-emerald-600 dark:text-emerald-400">0 Pengguna</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Kunjungan 7 Hari Terakhir</span>
+                    <span id="modalWeekVisitors" class="font-semibold text-slate-800 dark:text-slate-200">0 Kunjungan</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Kunjungan Bulan Ini</span>
+                    <span id="modalMonthVisitors" class="font-semibold text-slate-800 dark:text-slate-200">0 Kunjungan</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Waktu Akses Terakhir</span>
+                    <span id="sessionTimestamp" class="font-semibold text-blue-600 dark:text-blue-400">Baru saja</span>
+                </div>
+                <div class="pt-2 border-t border-slate-200/70 dark:border-slate-700/70">
+                    <span class="block text-[10px] text-slate-400 mb-0.5">ID Kunjungan Anda:</span>
+                    <code id="modalVisitorUserId" class="block text-[10px] font-mono text-slate-600 dark:text-slate-300 break-all bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-700">Memuat ID...</code>
+                </div>
+            </div>
+
+            <div class="mt-5 flex justify-end">
+                <button onclick="closeVisitorModal()" class="w-full py-2.5 rounded-xl bg-slate-900 dark:bg-blue-600 text-white text-xs font-semibold">Tutup Statistik</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+        <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900 text-white shadow-xl border border-slate-700 text-xs font-medium">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+            <span id="toastMessage">Berhasil disimpan!</span>
+        </div>
+    </div>
+
+    <!-- APPLICATION & REAL-TIME CLOUD SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        /**
+         * DATA GAMBAR & INFORMASI UTAMA HALAMAN BERANDA
+         */
+        const HOMEPAGE_HIGHLIGHT_IMAGES = [
+            {
+                id: 'beranda-img-1',
+                title: 'Informasi Peran Sekolah Model',
+                subtitle: 'Infografis Peran Strategis SDN 011 Balikpapan Tengah sebagai Sekolah Model',
+                badge: 'Peran Sekolah Model',
+                fileId: '1V-5nHNFqTmg8KkuIx5WT_5Qo7wBgjCgP',
+                url: 'https://drive.google.com/file/d/1V-5nHNFqTmg8KkuIx5WT_5Qo7wBgjCgP/view?usp=drive_link',
+                icon: 'fa-diagram-project',
+                accent: 'blue'
+            },
+            {
+                id: 'beranda-img-2',
+                title: 'Informasi Hasil Identifikasi Awal Sekolah Model',
+                subtitle: 'Infografis Ringkasan Capaian & Pemetaan Identifikasi Awal Satuan Pendidikan',
+                badge: 'Hasil Identifikasi Awal',
+                fileId: '1u6HugPAd0cxNitrY1HIWp65Wknb8tzzz',
+                url: 'https://drive.google.com/file/d/1u6HugPAd0cxNitrY1HIWp65Wknb8tzzz/view?usp=drive_link',
+                icon: 'fa-chart-column',
+                accent: 'emerald'
+            },
+            {
+                id: 'beranda-img-3',
+                title: 'SK Sekolah Model',
+                subtitle: 'Surat Keputusan Penetapan Sekolah Model SDN 011 Balikpapan Tengah',
+                badge: 'Legalitas & SK Resmi',
+                fileId: '1f9_hOuRNaySEyy_QjK0QVewu3xF_LkxG',
+                url: 'https://drive.google.com/file/d/1f9_hOuRNaySEyy_QjK0QVewu3xF_LkxG/view?usp=drive_link',
+                icon: 'fa-file-signature',
+                accent: 'amber'
+            }
+        ];
+
+        /**
+         * DATA MASTER: 13 MENU SEKOLAH MODEL SDN 011 BALIKPAPAN TENGAH
+         * Setiap menu memiliki penjelasan 1 paragraf sesuai konsep Sekolah Model
+         * serta daftar dokumen/tautan resmi.
+         */
+        const INITIAL_MENUS = [
+            {
+                id: 'profil-sekolah',
+                number: '01',
+                title: 'Profil Sekolah',
+                shortTitle: 'Profil Sekolah',
+                icon: 'fa-school',
+                color: 'blue',
+                category: 'Fondasi Satuan Pendidikan',
+                description: 'Profil Sekolah menggambarkan identitas utuh, karakteristik kontekstual, potensi sumber daya pendidik, tenaga kependidikan, peserta didik, serta ekosistem sosial-budaya di SDN 011 Balikpapan Tengah sebagai Sekolah Model. Melalui pemetaan profil satuan pendidikan dan penyusunan program sekolah yang terarah, SDN 011 Balikpapan Tengah berkomitmen menghadirkan lingkungan belajar yang inklusif, adaptif terhadap perkembangan teknologi, serta berorientasi pada peningkatan mutu layanan pendidikan secara berkelanjutan.',
+                highlights: [
+                    'Identitas & Karakteristik Satuan Pendidikan SDN 011 Balikpapan Tengah',
+                    'Peta Kekuatan Sumber Daya Guru, Tenaga Kependidikan, dan Sarana Prasarana',
+                    'Rancangan Program Unggulan Sekolah Model Berbasis Potensi Lokal'
+                ],
+                items: [
+                    {
+                        id: 'prof-1',
+                        title: 'Profil Satuan Pendidikan',
+                        subtitle: 'Presentasi Profil Lengkap SDN 011 Balikpapan Tengah',
+                        type: 'presentation',
+                        url: 'https://docs.google.com/presentation/d/1yCHtEnIboqyap9PzxI5lHKhuE05O-O_C/edit?usp=sharing&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'prof-2',
+                        title: 'Program Sekolah',
+                        subtitle: 'Dokumen Paparan Program Kerja & Unggulan Sekolah Model',
+                        type: 'presentation',
+                        url: 'https://docs.google.com/presentation/d/1fHnKBeI2OQkbBJGdwWadJpLuLPYGWseQ/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'visi-misi-tujuan',
+                number: '02',
+                title: 'Visi, Misi dan Tujuan Sekolah',
+                shortTitle: 'Visi, Misi & Tujuan',
+                icon: 'fa-compass',
+                color: 'indigo',
+                category: 'Fondasi Satuan Pendidikan',
+                description: 'Visi, Misi, dan Tujuan Sekolah merupakan kompas strategis yang dirumuskan secara kolaboratif bersama seluruh warga sekolah dan pemangku kepentingan untuk menuntun arah transformasi pembelajaran di SDN 011 Balikpapan Tengah. Penyelarasan visi dan misi ini dituangkan secara operasional ke dalam Kurikulum Satuan Pendidikan (KSP) guna memastikan setiap proses pembelajaran mampu membentuk profil lulusan yang berkarakter kuat, bernalar kritis, kreatif, dan siap menghadapi tantangan masa depan.',
+                highlights: [
+                    'Proses Kolaboratif Penyusunan Visi, Misi, dan Tujuan Bersama Warga Sekolah',
+                    'Penyelarasan Visi Sekolah dengan Kerangka Pembelajaran Mendalam (Deep Learning)',
+                    'Dokumen Resmi Kurikulum Satuan Pendidikan (KSP) SDN 011 Balikpapan Tengah'
+                ],
+                items: [
+                    {
+                        id: 'vmt-1',
+                        title: 'Video Penyusunan Visi, Misi dan Tujuan Sekolah',
+                        subtitle: 'Dokumentasi Video Kolaborasi Penyusunan Visi, Misi & Tujuan',
+                        type: 'video',
+                        url: 'https://youtube.com/shorts/qQ5BVF5YkVA?si=7ouSrE9fqKmJ-cu_'
+                    },
+                    {
+                        id: 'vmt-2',
+                        title: 'Analisis Penyelarasan Visi, Misi dan Tujuan Sekolah',
+                        subtitle: 'Dokumen Analisis Penyelarasan Visi, Misi, dan Tujuan Satuan Pendidikan',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1pm5Vz2R61wCCFy_pFvV3jKMSpx2wo16g/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'vmt-3',
+                        title: 'Kurikulum Satuan Pendidikan (KSP)',
+                        subtitle: 'Dokumen Kurikulum Operasional SDN 011 Balikpapan Tengah',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1yG12dbbaF4XuhYbFPInxuk8IxOrhRO3q/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'identifikasi-awal',
+                number: '03',
+                title: 'Identifikasi Awal',
+                shortTitle: 'Identifikasi Awal',
+                icon: 'fa-magnifying-glass-chart',
+                color: 'emerald',
+                category: 'Siklus Transformasi Sekolah',
+                description: 'Identifikasi Awal adalah tahapan diagnostik berbasis data untuk memotret kondisi nyata satuan pendidikan secara objektif sebelum merancang intervensi program Sekolah Model di SDN 011 Balikpapan Tengah. Melalui analisis komprehensif terhadap seluruh indikator sekolah model, penentuan indikator prioritas, serta pemetaan profil awal sekolah, guru, dan murid, sekolah dapat menemukan akar permasalahan sekaligus peluang pengembangan yang paling berdampak bagi peningkatan kualitas pembelajaran.',
+                highlights: [
+                    'Pemetaan & Analisis Awal Seluruh Indikator serta Indikator Prioritas Sekolah Model',
+                    'Asesmen Diagnostik Kondisi Awal Satuan Pendidikan secara Menyeluruh',
+                    'Profil Kebutuhan Belajar Murid dan Pemetaan Kompetensi Awal Guru'
+                ],
+                items: [
+                    {
+                        id: 'id-1',
+                        title: 'Video Kegiatan Identifikasi Awal',
+                        subtitle: 'Dokumentasi Pelaksanaan Identifikasi Awal Sekolah Model',
+                        type: 'video',
+                        url: 'https://youtube.com/shorts/QTSM0oq2r60?si=N7nxuD4wGrEbmjwL'
+                    },
+                    {
+                        id: 'id-2',
+                        title: 'Analisis Awal Semua Indikator Sekolah Model',
+                        subtitle: 'Dokumen Pemetaan Lengkap Indikator Sekolah Model',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1XhuZ3jJzHLCmVZLGR3_pMtKh3FTwDvAZ/view?usp=drive_link'
+                    },
+                    {
+                        id: 'id-3',
+                        title: 'Analisis Awal Indikator Prioritas Sekolah Model',
+                        subtitle: 'Penetapan Fokus Indikator Prioritas Transformasi Sekolah',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1urGUJbyklHfH6LVXJBKbmBtA40eWCXNp/view?usp=drive_link'
+                    },
+                    {
+                        id: 'id-4',
+                        title: 'Identifikasi Awal Sekolah',
+                        subtitle: 'Paparan Hasil Identifikasi Kondisi Satuan Pendidikan',
+                        type: 'presentation',
+                        url: 'https://docs.google.com/presentation/d/1CnlEWaYPuy99aOVepYtlghc3cexKCphm/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'id-5',
+                        title: 'Identifikasi Awal Murid',
+                        subtitle: 'Pemetaan Karakteristik, Kesiapan, dan Kebutuhan Belajar Murid',
+                        type: 'presentation',
+                        url: 'https://docs.google.com/presentation/d/1JaGF88ydhB5pDEpkubpYw6QyUN0y7-DB/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'id-6',
+                        title: 'Identifikasi Awal Guru',
+                        subtitle: 'Pemetaan Kompetensi Pedagogik dan Kebutuhan Pengembangan Guru',
+                        type: 'presentation',
+                        url: 'https://docs.google.com/presentation/d/1E0m1VwB0p2Hafe6wBa8xWEHjFcbc7FbU/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'perencanaan',
+                number: '04',
+                title: 'Perencanaan',
+                shortTitle: 'Perencanaan',
+                icon: 'fa-calendar-check',
+                color: 'amber',
+                category: 'Siklus Transformasi Sekolah',
+                description: 'Perencanaan merupakan tahap perumusan strategi dan peta jalan (roadmap) tindak lanjut yang disusun berdasarkan temuan pada identifikasi awal serta analisis rapor pendidikan SDN 011 Balikpapan Tengah. Pada tahap ini, tim pengembang sekolah merancang Rencana Kerja Sekolah (RKS), menetapkan indikator pengembang, serta menyusun jadwal implementasi program peningkatan kompetensi guru dan kualitas pembelajaran secara terukur, partisipatif, dan berorientasi pada hasil belajar murid.',
+                highlights: [
+                    'Perencanaan Berbasis Data (PBD) Berdasarkan Hasil Identifikasi Awal',
+                    'Perumusan Indikator Pengembang Rencana Kerja Sekolah Model',
+                    'Penyusunan Dokumen Rencana Kerja Sekolah (RKS) Secara Kolaboratif'
+                ],
+                items: [
+                    {
+                        id: 'ren-1',
+                        title: 'Video Penyusunan Rencana Kerja Sekolah',
+                        subtitle: 'Dokumentasi Kegiatan Kolaborasi Penyusunan Rencana Kerja Sekolah',
+                        type: 'video',
+                        url: 'https://youtube.com/shorts/3TFawfvEQBQ?si=JeM6455dEQoCp9ZC'
+                    },
+                    {
+                        id: 'ren-2',
+                        title: 'Indikator Pengembang Rencana Kerja Sekolah',
+                        subtitle: 'Dokumen Acuan Indikator Pengembangan Rencana Kerja Sekolah Model',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1v4EDSR8CJTlkSR13ht18In0kwN4G7iqF/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'ren-3',
+                        title: 'Rencana Kerja Sekolah (RKS)',
+                        subtitle: 'Dokumen Resmi Rencana Kerja Sekolah SDN 011 Balikpapan Tengah',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1c-bqXPiBUpYxokBE_oy_5ZRK2X3qI4Qy/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'implementasi',
+                number: '05',
+                title: 'Implementasi',
+                shortTitle: 'Implementasi',
+                icon: 'fa-gears',
+                color: 'cyan',
+                category: 'Siklus Transformasi Sekolah',
+                description: 'Implementasi adalah wujud nyata pelaksanaan rencana program Sekolah Model ke dalam aktivitas harian ekosistem pendidikan di SDN 011 Balikpapan Tengah secara konsisten dan terstruktur. Tahap ini dikawal melalui monitoring pelaksanaan implementasi Rencana Kerja Sekolah serta instrumen daftar periksa (checklist) keterlaksanaan program guna memastikan setiap intervensi berjalan efektif sesuai target transformasi satuan pendidikan.',
+                highlights: [
+                    'Pelaksanaan Program Sekolah Model Sesuai Rencana Kerja Sekolah (RKS)',
+                    'Monitoring Berkala Keterlaksanaan Implementasi Program Sekolah',
+                    'Evaluasi Ketercapaian Melalui Lembar Checklist Implementasi Sekolah Model'
+                ],
+                items: [
+                    {
+                        id: 'imp-1',
+                        title: 'Monitoring Pelaksanaan Implementasi Rencana Kerja Sekolah',
+                        subtitle: 'Dokumen Pemantauan Pelaksanaan Program Rencana Kerja Sekolah',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1P1uzjOEsnWD3XL_QVMt6ZRWNuRDplchn/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'imp-2',
+                        title: 'Lembar Checklist Implementasi Rencana Kerja Sekolah Model',
+                        subtitle: 'Instrumen Daftar Periksa Keterlaksanaan Rencana Kerja Sekolah Model',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1wFVo51CuoaU6TIGC4CX3-nB6n1a9d73Y/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'praktik-pembelajaran-mendalam',
+                number: '06',
+                title: 'Praktik Pembelajaran Mendalam',
+                shortTitle: 'Pembelajaran Mendalam',
+                icon: 'fa-brain',
+                color: 'purple',
+                category: 'Inovasi Pedagogik & Komunitas',
+                description: 'Praktik Pembelajaran Mendalam (Deep Learning) di SDN 011 Balikpapan Tengah berfokus pada penciptaan pengalaman belajar yang berkesadaran (mindful), bermakna (meaningful), dan menggembirakan (joyful) bagi setiap peserta didik di seluruh jenjang kelas maupun mata pelajaran. Diawali dengan penyusunan Alur Tujuan Pembelajaran (ATP), analisis indikator keunggulan perencanaan pembelajaran, hingga praktik nyata di ruang kelas, guru memfasilitasi murid untuk membangun pemahaman konsep secara mendalam dan kontekstual.',
+                highlights: [
+                    'Penyusunan Alur Tujuan Pembelajaran (ATP) & Modul Perencanaan Pembelajaran',
+                    'Dokumentasi Video Praktik Pembelajaran Mendalam Lintas Kelas (Kelas 1–5, PAI & BP, PJOK)',
+                    'Data Intervensi & Analisis Indikator Keunggulan Sekolah Model pada Pembelajaran'
+                ],
+                items: [
+                    {
+                        id: 'ppm-1',
+                        title: 'Video Penyusunan Alur Tujuan Pembelajaran (ATP)',
+                        subtitle: 'Dokumentasi Kolaborasi Guru dalam Penyusunan ATP',
+                        type: 'video',
+                        url: 'https://youtube.com/shorts/xPx6iSJ8IeQ?si=8iIsGL7AaAwZsd-3'
+                    },
+                    {
+                        id: 'ppm-2',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 1',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 1 SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/HdDG_sodpSM?si=GTIUlfjFfcgqjiad'
+                    },
+                    {
+                        id: 'ppm-3',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 2A',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 2A SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/uNkr08X9c0A?si=DUEzkrg5USwBIZhz'
+                    },
+                    {
+                        id: 'ppm-4',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 2B',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 2B SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/6BrFg5nS1PM?si=o6_JX9YxI-zHTPsu'
+                    },
+                    {
+                        id: 'ppm-5',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 3',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 3 SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/ZDSlP8vqx24?si=ksH41NutC8EhmllH'
+                    },
+                    {
+                        id: 'ppm-6',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 4',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 4 SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/YK3BthBdqqU?si=ejCmN86hDGm-re1a'
+                    },
+                    {
+                        id: 'ppm-7',
+                        title: 'Video Praktik Pembelajaran Mendalam - Kelas 5',
+                        subtitle: 'Implementasi Pembelajaran Mendalam di Kelas 5 SDN 011 Balteng',
+                        type: 'video',
+                        url: 'https://youtu.be/swlZEEJ1SlQ?si=2ZmfPzgUAK8Z-ddU'
+                    },
+                    {
+                        id: 'ppm-8',
+                        title: 'Video Praktik Pembelajaran Mendalam - PAI dan BP',
+                        subtitle: 'Implementasi Pembelajaran Mendalam Mata Pelajaran PAI dan Budi Pekerti',
+                        type: 'video',
+                        url: 'https://youtu.be/QyNDYzJ8p0I?si=cEYFJDg0YqIJkKzU'
+                    },
+                    {
+                        id: 'ppm-9',
+                        title: 'Video Praktik Pembelajaran Mendalam - PJOK',
+                        subtitle: 'Implementasi Pembelajaran Mendalam Mata Pelajaran PJOK',
+                        type: 'video',
+                        url: 'https://youtu.be/-lcboNxMiEs?si=ypu6vURthHN7M5T0'
+                    },
+                    {
+                        id: 'ppm-10',
+                        title: 'Dokumen ATP dan Perencanaan Pembelajaran',
+                        subtitle: 'Folder Kumpulan Dokumen ATP dan Perencanaan Pembelajaran Guru',
+                        type: 'folder',
+                        url: 'https://drive.google.com/drive/folders/1AqTUHCChHLE8HvZLtPIbrJIVFRrOD4-2?usp=drive_link'
+                    },
+                    {
+                        id: 'ppm-11',
+                        title: 'Data Intervensi Indikator Keunggulan Sekolah Model pada Praktik Pembelajaran Mendalam',
+                        subtitle: 'Rekapitulasi Data Intervensi Indikator Keunggulan Pembelajaran Mendalam',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1u0jiN-Mx19_RNt6AmzAV9niy3VwtrYh0/view?usp=drive_link'
+                    },
+                    {
+                        id: 'ppm-12',
+                        title: 'Analisis Indikator Keunggulan Sekolah Model Pada Perencanaan Pembelajaran (Bagian 1)',
+                        subtitle: 'Dokumen Analisis Indikator Keunggulan Perencanaan Pembelajaran - Bagian 1',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1N9dOjHjue3Pu2rWN_O5qveLpMkyJmRAa/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'ppm-13',
+                        title: 'Analisis Indikator Keunggulan Sekolah Model Pada Perencanaan Pembelajaran (Bagian 2)',
+                        subtitle: 'Dokumen Analisis Indikator Keunggulan Perencanaan Pembelajaran - Bagian 2',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1zhN7avalWE7dRQx-D3yVcou6wJSyU3zq/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'inkuiri-kolaboratif',
+                number: '07',
+                title: 'Inkuiri Kolaboratif',
+                shortTitle: 'Inkuiri Kolaboratif',
+                icon: 'fa-people-group',
+                color: 'rose',
+                category: 'Inovasi Pedagogik & Komunitas',
+                description: 'Inkuiri Kolaboratif merupakan siklus belajar bersama para pendidik di dalam Komunitas Belajar SDN 011 Balikpapan Tengah untuk mengidentifikasi tantangan pembelajaran di kelas, merancang solusi pedagogis berbasis bukti melalui lembar kerja inkuiri, mempraktikkannya, dan menganalisis hasil intervensi dampaknya terhadap murid. Budaya kolaborasi terjadwal ini mentransformasi cara kerja guru menjadi kolektif-reflektif demi peningkatan mutu pembelajaran yang merata.',
+                highlights: [
+                    'Pelaksanaan Komunitas Belajar Terjadwal & Penggunaan Lembar Kerja Inkuiri Kolaboratif',
+                    'Dokumentasi Video Kolaborasi Pendidik dalam Siklus Inkuiri',
+                    'Analisis Data Intervensi dan Hasil Intervensi Indikator Keunggulan Pembelajaran'
+                ],
+                items: [
+                    {
+                        id: 'ik-1',
+                        title: 'Video Pelaksanaan Inkuiri Kolaboratif',
+                        subtitle: 'Dokumentasi Kegiatan Diskusi dan Refleksi Inkuiri Kolaboratif Guru',
+                        type: 'video',
+                        url: 'https://youtu.be/KD2PWvXLHKE?si=t-1b8u7AUJVVEw_U'
+                    },
+                    {
+                        id: 'ik-2',
+                        title: 'Jadwal Komunitas Belajar',
+                        subtitle: 'Jadwal Rutin Pertemuan Komunitas Belajar SDN 011 Balikpapan Tengah',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1SurWVkZvZXfTQetAIdUtKPQTNshA3o6F/view?usp=drive_link'
+                    },
+                    {
+                        id: 'ik-3',
+                        title: 'Lembar Kerja Inkuiri Kolaboratif',
+                        subtitle: 'Dokumen Lembar Kerja Siklus Inkuiri Kolaboratif Komunitas Belajar',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1SurWVkZvZXfTQetAIdUtKPQTNshA3o6F/view?usp=drive_link'
+                    },
+                    {
+                        id: 'ik-4',
+                        title: 'Data Intervensi Indikator Keunggulan Sekolah Model pada Praktik Pembelajaran Mendalam',
+                        subtitle: 'Data Dasar Intervensi Indikator Keunggulan melalui Inkuiri Kolaboratif',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1u0jiN-Mx19_RNt6AmzAV9niy3VwtrYh0/view?usp=drive_link'
+                    },
+                    {
+                        id: 'ik-5',
+                        title: 'Data Hasil Intervensi Indikator Keunggulan Sekolah Model pada Praktik Pembelajaran Mendalam',
+                        subtitle: 'Laporan Hasil & Dampak Intervensi Indikator Keunggulan Sekolah Model',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1fZMsJ00g7LFF0O9xU7x0JjZ2_EWY8KXw/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'teacher-experimental-training',
+                number: '08',
+                title: 'Teacher Experimental Training (TET)',
+                shortTitle: 'Program TET',
+                icon: 'fa-flask-vial',
+                color: 'teal',
+                category: 'Inovasi Pedagogik & Komunitas',
+                description: 'Teacher Experimental Training (TET) adalah wadah pelatihan eksperimental terjadwal yang memberi ruang aman bagi guru-guru SDN 011 Balikpapan Tengah untuk melakukan uji coba inovasi metode, strategi, dan media pembelajaran interaktif sebelum diterapkan secara luas. Melalui panduan lembar pelaksanaan TET dan pendekatan belajar dari praktik langsung (experiential learning), para guru terdorong untuk berani berinovasi dan berbagi praktik baik bersama rekan sejawat.',
+                highlights: [
+                    'Pelaksanaan Teacher Experimental Training (TET) secara Terjadwal',
+                    'Dokumentasi Video Simulasi & Eksperimen Strategi Pedagogik Baru oleh Guru',
+                    'Pencatatan dan Refleksi melalui Lembar Pelaksanaan TET'
+                ],
+                items: [
+                    {
+                        id: 'tet-1',
+                        title: 'Video Pelaksanaan Teacher Experimental Training (TET)',
+                        subtitle: 'Dokumentasi Video Kegiatan Teacher Experimental Training (TET)',
+                        type: 'video',
+                        url: 'https://youtu.be/LyvtDq0Jzl8?si=TGAWbsiaM5DgQv-m'
+                    },
+                    {
+                        id: 'tet-2',
+                        title: 'Jadwal TET (Teacher Experimental Training)',
+                        subtitle: 'Dokumen Jadwal Pelaksanaan Program Teacher Experimental Training',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1bgkrQlYUJMYV6DHupy3KnLLksCuOrofO/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'tet-3',
+                        title: 'Lembar Pelaksanaan TET',
+                        subtitle: 'Instrumen & Catatan Lembar Pelaksanaan Teacher Experimental Training',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1bY93KEFmQORhTWxGggx8B7S6q6H-K-p0/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'supervisi-akademik',
+                number: '09',
+                title: 'Supervisi Akademik',
+                shortTitle: 'Supervisi Akademik',
+                icon: 'fa-clipboard-user',
+                color: 'orange',
+                category: 'Kepemimpinan & Tata Kelola',
+                description: 'Supervisi Akademik di SDN 011 Balikpapan Tengah dilaksanakan secara klinis, humanis, dan kemitraan oleh Kepala Sekolah untuk mendampingi guru dalam meningkatkan mutu proses pembelajaran di kelas. Rangkaian supervisi yang terstruktur mulai dari jadwal pra-observasi, jadwal observasi kelas menggunakan instrumen yang terstandar, hingga rekapitulasi dan analisis hasil supervisi akademik dirancang untuk menumbuhkan kesadaran reflektif serta peningkatan kompetensi berkelanjutan guru.',
+                highlights: [
+                    'Penjadwalan Terstruktur Tahap Pra-Observasi dan Observasi Kelas',
+                    'Penggunaan Instrumen Supervisi Akademik yang Berfokus pada Kualitas Pembelajaran',
+                    'Dokumentasi Hasil serta Analisis Hasil Supervisi Akademik untuk Tindak Lanjut'
+                ],
+                items: [
+                    {
+                        id: 'sup-1',
+                        title: 'Video Pelaksanaan Supervisi Akademik',
+                        subtitle: 'Dokumentasi Video Rangkaian Kegiatan Supervisi Akademik di Kelas',
+                        type: 'video',
+                        url: 'https://youtu.be/s0IOAvIBKec?si=lLwuBkEiIgPs2MQz'
+                    },
+                    {
+                        id: 'sup-2',
+                        title: 'Jadwal Pra Observasi Supervisi Akademik',
+                        subtitle: 'Dokumen Jadwal Pertemuan Pra-Observasi Kepala Sekolah & Guru',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1ui0845A91Jxf23VqqItDFpgHKSJbJOU1/view?usp=drive_link'
+                    },
+                    {
+                        id: 'sup-3',
+                        title: 'Jadwal Pelaksanaan Observasi Supervisi Akademik',
+                        subtitle: 'Dokumen Jadwal Pelaksanaan Observasi Pembelajaran di Kelas',
+                        type: 'drive',
+                        url: 'https://drive.google.com/file/d/1KqPa5gJIuzzfohcz9lIN7em7UQnwPqR7/view?usp=sharing'
+                    },
+                    {
+                        id: 'sup-4',
+                        title: 'Contoh Instrumen Supervisi Akademik',
+                        subtitle: 'Dokumen Instrumen Penilaian dan Pengamatan Supervisi Akademik',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1G7YKyTQ300blkLpkv5DU9JfvjJ36VEwh/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'sup-5',
+                        title: 'Hasil Supervisi Akademik',
+                        subtitle: 'Rekapitulasi Hasil Pelaksanaan Supervisi Akademik Guru',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1Wfo_dPBZ4YDG6EhVYr5rGssKyrRi38bU/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    },
+                    {
+                        id: 'sup-6',
+                        title: 'Analisis Hasil Supervisi Akademik',
+                        subtitle: 'Dokumen Evaluasi & Analisis Hasil Supervisi Akademik untuk Tindak Lanjut',
+                        type: 'document',
+                        url: 'https://docs.google.com/document/d/1r9SJCM--DT1Fh6qZU7JgkjMAJRlB8cTK/edit?usp=drive_link&ouid=103588907660176343651&rtpof=true&sd=true'
+                    }
+                ]
+            },
+            {
+                id: 'manajemen-kepala-sekolah',
+                number: '10',
+                title: 'Manajemen Kepala Sekolah',
+                shortTitle: 'Manajemen Kepsek',
+                icon: 'fa-user-tie',
+                color: 'blue',
+                category: 'Kepemimpinan & Tata Kelola',
+                description: 'Manajemen Kepala Sekolah mencerminkan kepemimpinan pembelajaran (instructional leadership) dan tata kelola transformasional dalam menggerakkan seluruh sumber daya SDN 011 Balikpapan Tengah menuju pencapaian visi Sekolah Model. Melalui pengambilan keputusan berbasis data, pengelolaan sumber daya yang transparan dan akuntabel, serta pemberdayaan staf, Kepala Sekolah membangun iklim organisasi yang adaptif, kolaboratif, dan berorientasi pada layanan prima kepada murid.',
+                highlights: [
+                    'Kepemimpinan Pembelajaran (Instructional Leadership) Penggerak Perubahan',
+                    'Tata Kelola Organisasi Sekolah yang Transparan, Akuntabel, dan Partisipatif',
+                    'Pengembangan Kapasitas SDM dan Kemitraan Strategis Satuan Pendidikan'
+                ],
+                items: []
+            },
+            {
+                id: 'kegiatan-kewirausahaan',
+                number: '11',
+                title: 'Kegiatan Kewirausahaan',
+                shortTitle: 'Kewirausahaan',
+                icon: 'fa-lightbulb',
+                color: 'amber',
+                category: 'Kepemimpinan & Tata Kelola',
+                description: 'Kegiatan Kewirausahaan di SDN 011 Balikpapan Tengah merupakan wujud pengembangan karakter inovatif, kemandirian, kerja keras, dan daya kreasi baik bagi warga sekolah maupun peserta didik. Melalui program kewirausahaan berbasis potensi lokal dan kepedulian lingkungan, sekolah menciptakan ekosistem belajar kontekstual yang mengasah kecakapan hidup (life skills), literasi finansial dasar, serta jiwa kepemimpinan sosial sejak usia sekolah dasar.',
+                highlights: [
+                    'Pengembangan Jiwa Inovatif, Kreatif, dan Pantang Menyerah pada Warga Sekolah',
+                    'Proyek Kewirausahaan Murid Berbasis Kearifan Lokal & Ramah Lingkungan',
+                    'Kemitraan Usaha & Pemanfaatan Sumber Daya Sekolah untuk Kemandirian'
+                ],
+                items: []
+            },
+            {
+                id: 'monitoring-dan-evaluasi',
+                number: '12',
+                title: 'Monitoring dan Evaluasi',
+                shortTitle: 'Monitoring & Evaluasi',
+                icon: 'fa-chart-pie',
+                color: 'emerald',
+                category: 'Penjaminan Mutu & Keberlanjutan',
+                description: 'Monitoring dan Evaluasi (Monev) dilakukan secara berkala dan sistematis untuk memantau keterlaksanaan program Sekolah Model serta mengukur dampak nyata perubahan praktik pembelajaran di SDN 011 Balikpapan Tengah. Dengan menggunakan instrumen pemantauan yang terukur dan refleksi berbasis data capaian murid, sekolah dapat mengidentifikasi keberhasilan, mengatasi hambatan pelaksanaan, serta menyusun rekomendasi perbaikan siklus berikutnya.',
+                highlights: [
+                    'Pemantauan Keterlaksanaan Program dan Ketercapaian Indikator Prioritas',
+                    'Evaluasi Dampak Program terhadap Perubahan Praktik Guru dan Hasil Belajar Murid',
+                    'Refleksi Berkala Bersama Warga Sekolah untuk Perbaikan Siklus Berikutnya'
+                ],
+                items: []
+            },
+            {
+                id: 'pendampingan',
+                number: '13',
+                title: 'Pendampingan',
+                shortTitle: 'Pendampingan',
+                icon: 'fa-hands-holding-circle',
+                color: 'indigo',
+                category: 'Penjaminan Mutu & Keberlanjutan',
+                description: 'Pendampingan adalah proses fasilitasi, konsultasi, dan penguatan kapasitas yang dilakukan secara intensif bersama fasilitator ahli, pengawas sekolah, maupun pendamping internal guna menjaga kualitas implementasi Sekolah Model di SDN 011 Balikpapan Tengah. Melalui sesi coaching, mentoring, dan refleksi terjadwal, proses pendampingan memastikan setiap tahapan transformasi berjalan efektif sekaligus mempersiapkan SDN 011 Balikpapan Tengah sebagai sekolah rujukan pengimbasan.',
+                highlights: [
+                    'Fasilitasi & Coaching Berkala Bersama Tim Pendamping dan Pengawas Sekolah',
+                    'Pendampingan Sebaya (Peer Mentoring) Antar Guru di Satuan Pendidikan',
+                    'Kesiapan Pengimbasan Praktik Baik Sekolah Model ke Satuan Pendidikan Lain'
+                ],
+                items: []
+            }
+        ];
+
+        // State Aplikasi & Statistik Pengunjung Riil (Dimulai dari 0, diisi murni dari kunjungan nyata)
+        let menusData = JSON.parse(JSON.stringify(INITIAL_MENUS));
+        let currentView = 'beranda';
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let hasRecordedVisitInSession = false;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sdn011-balikpapan-tengah';
+
+        let visitorStats = {
+            total: 0,
+            today: 0,
+            week: 0,
+            month: 0,
+            uniqueCount: 0,
+            lastVisit: 'Baru saja',
+            userId: '-'
+        };
+
+        // Helper Tanggal Lokal (YYYY-MM-DD)
+        function getDateKey(dateObj = new Date()) {
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Hitung statistik mingguan dan bulanan dari map harian riil
+        function computePeriodStats(dailyMap = {}) {
+            const now = new Date();
+            const todayKey = getDateKey(now);
+            const currentMonthPrefix = todayKey.slice(0, 7); // YYYY-MM
+
+            // 7 hari terakhir
+            const last7DaysKeys = [];
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(now);
+                d.setDate(now.getDate() - i);
+                last7DaysKeys.push(getDateKey(d));
+            }
+
+            let todayCount = Number(dailyMap[todayKey] || 0);
+            let weekCount = 0;
+            let monthCount = 0;
+
+            Object.entries(dailyMap).forEach(([dateStr, count]) => {
+                const num = Number(count) || 0;
+                if (last7DaysKeys.includes(dateStr)) {
+                    weekCount += num;
+                }
+                if (dateStr.startsWith(currentMonthPrefix)) {
+                    monthCount += num;
+                }
+            });
+
+            return { todayCount, weekCount, monthCount };
+        }
+
+        // Inisialisasi Firebase & Pencatatan Pengunjung Riil
+        async function initRealTimeSystem() {
+            const nowFormatted = new Date().toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            try {
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+
+                    // RULE 3: Auth Before Queries
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    currentUser = auth.currentUser;
+                    if (!currentUser) return;
+
+                    visitorStats.userId = currentUser.uid;
+
+                    // Referensi dokumen counter pengunjung riil (RULE 1: Strict Path)
+                    const statsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'visitor_stats', 'real_counter');
+
+                    // Catat kunjungan riil saat sesi dibuka
+                    if (!hasRecordedVisitInSession) {
+                        hasRecordedVisitInSession = true;
+                        const snap = await getDoc(statsDocRef);
+                        const todayKey = getDateKey();
+
+                        let total = 1;
+                        let daily = { [todayKey]: 1 };
+                        let uniqueUsers = [currentUser.uid];
+
+                        if (snap.exists()) {
+                            const data = snap.data();
+                            total = (Number(data.total) || 0) + 1;
+                            daily = data.daily && typeof data.daily === 'object' ? { ...data.daily } : {};
+                            daily[todayKey] = (Number(daily[todayKey]) || 0) + 1;
+
+                            uniqueUsers = Array.isArray(data.uniqueUsers) ? [...data.uniqueUsers] : [];
+                            if (!uniqueUsers.includes(currentUser.uid)) {
+                                uniqueUsers.push(currentUser.uid);
+                            }
+                        }
+
+                        await setDoc(statsDocRef, {
+                            total,
+                            daily,
+                            uniqueUsers,
+                            lastVisit: nowFormatted,
+                            updatedAt: Date.now()
+                        });
+                    }
+
+                    // Dengarkan perubahan jumlah pengunjung secara real-time
+                    onSnapshot(
+                        statsDocRef,
+                        (docSnap) => {
+                            if (docSnap.exists()) {
+                                const data = docSnap.data();
+                                const dailyMap = data.daily || {};
+                                const { todayCount, weekCount, monthCount } = computePeriodStats(dailyMap);
+                                const uniqueArr = Array.isArray(data.uniqueUsers) ? data.uniqueUsers : [];
+
+                                visitorStats = {
+                                    total: Number(data.total) || 1,
+                                    today: todayCount,
+                                    week: weekCount,
+                                    month: monthCount,
+                                    uniqueCount: uniqueArr.length || 1,
+                                    lastVisit: data.lastVisit || nowFormatted,
+                                    userId: currentUser.uid
+                                };
+                                updateVisitorUI();
+                            }
+                        },
+                        (err) => {
+                            console.error('Gagal memuat stream statistik pengunjung:', err);
+                        }
+                    );
+                } else {
+                    // Fallback apabila dijalankan tanpa konfigurasi cloud: hitung 1 kunjungan nyata sesi ini
+                    visitorStats = {
+                        total: 1,
+                        today: 1,
+                        week: 1,
+                        month: 1,
+                        uniqueCount: 1,
+                        lastVisit: nowFormatted,
+                        userId: 'sesi-lokal-' + crypto.randomUUID()
+                    };
+                    updateVisitorUI();
+                }
+            } catch (error) {
+                console.error('Inisialisasi statistik pengunjung mengalami kendala:', error);
+                visitorStats = {
+                    total: 1,
+                    today: 1,
+                    week: 1,
+                    month: 1,
+                    uniqueCount: 1,
+                    lastVisit: nowFormatted,
+                    userId: currentUser?.uid || 'sesi-aktif'
+                };
+                updateVisitorUI();
+            }
+        }
+
+        function updateVisitorUI() {
+            const formattedTotal = visitorStats.total.toLocaleString('id-ID');
+            const formattedToday = visitorStats.today.toLocaleString('id-ID');
+            const formattedWeek = visitorStats.week.toLocaleString('id-ID');
+            const formattedMonth = visitorStats.month.toLocaleString('id-ID');
+            const formattedUnique = visitorStats.uniqueCount.toLocaleString('id-ID');
+
+            const sidebarTotalEl = document.getElementById('sidebarTotalVisitors');
+            const sidebarTodayEl = document.getElementById('sidebarTodayVisitors');
+            const headerCountEl = document.getElementById('headerVisitorCount');
+            const modalTotalEl = document.getElementById('modalTotalVisitors');
+            const modalTodayEl = document.getElementById('modalTodayVisitors');
+            const modalUniqueEl = document.getElementById('modalUniqueVisitors');
+            const modalWeekEl = document.getElementById('modalWeekVisitors');
+            const modalMonthEl = document.getElementById('modalMonthVisitors');
+            const sessionTimeEl = document.getElementById('sessionTimestamp');
+            const modalUserIdEl = document.getElementById('modalVisitorUserId');
+
+            if (sidebarTotalEl) sidebarTotalEl.textContent = formattedTotal;
+            if (sidebarTodayEl) sidebarTodayEl.textContent = '+' + formattedToday;
+            if (headerCountEl) headerCountEl.textContent = formattedTotal;
+            if (modalTotalEl) modalTotalEl.textContent = formattedTotal;
+            if (modalTodayEl) modalTodayEl.textContent = formattedToday;
+            if (modalUniqueEl) modalUniqueEl.textContent = `${formattedUnique} Pengguna`;
+            if (modalWeekEl) modalWeekEl.textContent = `${formattedWeek} Kunjungan`;
+            if (modalMonthEl) modalMonthEl.textContent = `${formattedMonth} Kunjungan`;
+            if (sessionTimeEl) sessionTimeEl.textContent = visitorStats.lastVisit;
+            if (modalUserIdEl) modalUserIdEl.textContent = visitorStats.userId;
+
+            // Perbarui juga angka di Hero Beranda jika sedang berada di halaman Beranda
+            const heroTotalEl = document.getElementById('heroTotalVisitors');
+            const heroTodayEl = document.getElementById('heroTodayVisitors');
+            if (heroTotalEl) heroTotalEl.textContent = formattedTotal;
+            if (heroTodayEl) heroTodayEl.textContent = '+' + formattedToday;
+        }
+
+        // Render Navigasi Sidebar
+        function renderSidebar(filterText = '') {
+            const container = document.getElementById('sidebarNavContainer');
+            const query = filterText.trim().toLowerCase();
+
+            let html = `
+                <button onclick="navigateTo('beranda')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition ${
+                    currentView === 'beranda'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
+                }">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-house-chimney w-4 text-center"></i>
+                        <span>Beranda Utama</span>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full ${currentView === 'beranda' ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'}">Dashboard</span>
+                </button>
+                <div class="pt-3 pb-1 px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    Menu Portofolio (13 Komponen)
+                </div>
+            `;
+
+            const filteredMenus = menusData.filter(m => 
+                m.title.toLowerCase().includes(query) ||
+                m.description.toLowerCase().includes(query) ||
+                m.items.some(i => i.title.toLowerCase().includes(query))
+            );
+
+            if (filteredMenus.length === 0) {
+                html += `
+                    <div class="p-4 text-center text-xs text-slate-400">
+                        <i class="fa-solid fa-folder-open text-lg mb-1 block"></i>
+                        Menu tidak ditemukan
+                    </div>
+                `;
+            } else {
+                filteredMenus.forEach(menu => {
+                    const isActive = currentView === menu.id;
+                    const docCount = menu.items.length;
+                    html += `
+                        <button onclick="navigateTo('${menu.id}')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs font-medium transition group ${
+                            isActive
+                                ? 'bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200/80 dark:border-blue-800/80'
+                                : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
+                        }">
+                            <div class="flex items-center gap-2.5 min-w-0 pr-2">
+                                <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold shrink-0 ${
+                                    isActive
+                                        ? 'bg-blue-600 text-white'
+                                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:bg-blue-100 group-hover:text-blue-600'
+                                }">${menu.number}</span>
+                                <span class="truncate">${menu.title}</span>
+                            </div>
+                            ${docCount > 0 ? `
+                                <span class="px-2 py-0.5 text-[10px] font-bold rounded-full shrink-0 ${
+                                    isActive ? 'bg-blue-600 text-white' : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
+                                }">${docCount} file</span>
+                            ` : `
+                                <i class="fa-solid fa-chevron-right text-[10px] opacity-40 group-hover:translate-x-0.5 transition"></i>
+                            `}
+                        </button>
+                    `;
+                });
+            }
+
+            container.innerHTML = html;
+        }
+
+        function filterSidebarMenus(val) {
+            renderSidebar(val);
+        }
+
+        // Navigasi Antar Halaman
+        function navigateTo(viewId) {
+            currentView = viewId;
+            renderSidebar(document.getElementById('menuSearchInput').value);
+
+            const mainEl = document.getElementById('mainContent');
+            const breadcrumbEl = document.getElementById('topBreadcrumbCurrent');
+
+            if (viewId === 'beranda') {
+                breadcrumbEl.textContent = 'Beranda Portofolio';
+                mainEl.innerHTML = renderBerandaView();
+            } else {
+                const menuObj = menusData.find(m => m.id === viewId);
+                if (menuObj) {
+                    breadcrumbEl.textContent = `${menuObj.number}. ${menuObj.title}`;
+                    mainEl.innerHTML = renderMenuDetailView(menuObj);
+                }
+            }
+
+            // Close sidebar automatically on mobile screens after selecting a menu
+            if (window.innerWidth < 1024 && isSidebarOpen) {
+                setSidebarState(false);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Halaman Beranda Utama
+        function renderBerandaView() {
+            const totalDocs = menusData.reduce((acc, m) => acc + m.items.length, 0);
+            const formattedVisitors = visitorStats.total.toLocaleString('id-ID');
+
+            return `
+                <div class="page-fade space-y-8">
+                    
+                    <!-- Hero Banner Section -->
+                    <section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-950 text-white p-6 sm:p-10 lg:p-12 shadow-xl border border-blue-800/40">
+                        <div class="absolute top-0 right-0 -mt-16 -mr-16 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
+                        <div class="absolute bottom-0 left-1/3 -mb-20 w-72 h-72 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
+
+                        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-8 space-y-4">
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold text-amber-300">
+                                    <i class="fa-solid fa-award"></i>
+                                    <span>Portofolio Resmi Implementasi Sekolah Model</span>
+                                </div>
+                                <h1 class="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
+                                    Sekolah Model <br class="hidden sm:inline" />
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-emerald-300">
+                                        SDN 011 Balikpapan Tengah
+                                    </span>
+                                </h1>
+                                <p class="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl">
+                                    Selamat datang di pusat dokumentasi, bukti fisik, dan praktik baik transformasi satuan pendidikan SDN 011 Balikpapan Tengah. Situs ini memuat 13 komponen utama implementasi Sekolah Model secara transparan, terstruktur, dan interaktif.
+                                </p>
+                                <div class="flex flex-wrap items-center gap-3 pt-2">
+                                    <button onclick="navigateTo('profil-sekolah')" class="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-display font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition">
+                                        <span>Mulai Jelajahi Portofolio</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                    <button onclick="navigateTo('identifikasi-awal')" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold text-xs sm:text-sm flex items-center gap-2 transition">
+                                        <i class="fa-solid fa-magnifying-glass-chart text-emerald-300"></i>
+                                        <span>Lihat Identifikasi Awal</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Visitor & Quick Counter Card on Hero -->
+                            <div class="lg:col-span-4">
+                                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 sm:p-6 space-y-4 shadow-inner">
+                                    <div class="flex items-center justify-between border-b border-white/15 pb-3">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-3 h-3 rounded-full bg-emerald-400 pulse-dot"></span>
+                                            <span class="text-xs font-bold uppercase tracking-wider text-blue-100">Data Pengunjung Riil</span>
+                                        </div>
+                                        <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-semibold">Real-Time</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="bg-slate-950/40 rounded-2xl p-3.5 border border-white/10">
+                                            <p class="text-[11px] text-blue-200">Total Kunjungan</p>
+                                            <p id="heroTotalVisitors" class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-0.5">${formattedVisitors}</p>
+                                        </div>
+                                        <div class="bg-slate-950/40 rounded-2xl p-3.5 border border-white/10">
+                                            <p class="text-[11px] text-blue-200">Hari Ini</p>
+                                            <p id="heroTodayVisitors" class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-400 mt-0.5">+${visitorStats.today}</p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3 pt-1">
+                                        <div class="flex items-center gap-2.5 text-xs text-blue-100">
+                                            <i class="fa-solid fa-layer-group text-amber-300"></i>
+                                            <span><strong>13</strong> Menu Utama</span>
+                                        </div>
+                                        <div class="flex items-center gap-2.5 text-xs text-blue-100">
+                                            <i class="fa-solid fa-file-shield text-emerald-300"></i>
+                                            <span><strong>${totalDocs}</strong> Dokumen Aktif</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Galeri Gambar & Informasi Utama Sekolah Model di Beranda -->
+                    <section class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs">
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Informasi Utama & Legalitas</span>
+                                <h2 class="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white mt-0.5">Peran, Hasil Identifikasi Awal, & SK Sekolah Model</h2>
+                            </div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Klik pada gambar untuk memperbesar tampilan penuh</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            ${HOMEPAGE_HIGHLIGHT_IMAGES.map(item => `
+                                <div class="group bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300">
+                                    <div>
+                                        <!-- Image Preview Container -->
+                                        <div onclick="openPreviewModal('${escapeQuotes(item.title)}', '${item.url}', 'drive')" class="relative aspect-[4/3] bg-slate-200 dark:bg-slate-950 overflow-hidden cursor-pointer">
+                                            <img 
+                                                src="https://drive.google.com/thumbnail?id=${item.fileId}&sz=w1200" 
+                                                alt="${escapeQuotes(item.title)}" 
+                                                class="w-full h-full object-contain bg-slate-900/5 dark:bg-slate-950 group-hover:scale-105 transition duration-500"
+                                                onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/${item.fileId}=w1200';"
+                                            >
+                                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-between p-4">
+                                                <span class="px-3 py-1.5 rounded-xl bg-white/95 text-slate-900 font-semibold text-xs flex items-center gap-1.5 shadow-md">
+                                                    <i class="fa-solid fa-magnifying-glass-plus text-blue-600"></i>
+                                                    <span>Perbesar Gambar</span>
+                                                </span>
+                                            </div>
+                                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                                                <i class="fa-solid ${item.icon} text-amber-300"></i>
+                                                <span>${item.badge}</span>
+                                            </span>
+                                        </div>
+
+                                        <!-- Card Text -->
+                                        <div class="p-5">
+                                            <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                                                ${item.title}
+                                            </h3>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                                                ${item.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="px-5 pb-5 pt-2 flex items-center gap-2.5">
+                                        <button onclick="openPreviewModal('${escapeQuotes(item.title)}', '${item.url}', 'drive')" class="flex-1 py-2.5 px-3.5 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/80 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+                                            <i class="fa-solid fa-expand"></i>
+                                            <span>Lihat Penuh</span>
+                                        </button>
+                                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition" title="Buka di Tab Baru">
+                                            <span>Buka File</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- Quick Highlight Dokumen Utama yang Tersedia -->
+                    <section class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Akses Cepat Bukti Fisik</span>
+                                <h2 class="font-display font-bold text-xl text-slate-900 dark:text-white mt-0.5">Dokumen & Video Unggulan Sekolah Model</h2>
+                            </div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Klik tombol <strong>Pratinjau</strong> atau <strong>Buka Dokumen</strong></span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            ${menusData.filter(m => m.items.length > 0).map(menu => `
+                                <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/70 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between gap-2 mb-3">
+                                            <span class="px-2.5 py-1 rounded-lg bg-blue-600 text-white text-[11px] font-bold">Menu ${menu.number}</span>
+                                            <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">${menu.items.length} Dokumen</span>
+                                        </div>
+                                        <h3 class="font-display font-bold text-base text-slate-900 dark:text-white mb-2">${menu.title}</h3>
+                                        <ul class="space-y-2 mb-4">
+                                            ${menu.items.slice(0, 4).map(item => `
+                                                <li>
+                                                    <button onclick="openPreviewModal('${escapeQuotes(item.title)}', '${item.url}', '${item.type}')" class="w-full text-left flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 py-1 group">
+                                                        <i class="${getDocTypeIcon(item.type)} shrink-0"></i>
+                                                        <span class="truncate group-hover:underline">${item.title}</span>
+                                                    </button>
+                                                </li>
+                                            `).join('')}
+                                            ${menu.items.length > 4 ? `
+                                                <li class="text-[11px] font-semibold text-blue-600 dark:text-blue-400 pt-1">
+                                                    + ${menu.items.length - 4} dokumen/video lainnya...
+                                                </li>
+                                            ` : ''}
+                                        </ul>
+                                    </div>
+                                    <button onclick="navigateTo('${menu.id}')" class="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-semibold transition flex items-center justify-center gap-2">
+                                        <span>Buka Halaman ${menu.shortTitle}</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- Daftar Lengkap 13 Menu Sekolah Model -->
+                    <section class="space-y-5">
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Struktur Portofolio Lengkap</span>
+                                <h2 class="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white mt-0.5">13 Menu Implementasi Sekolah Model</h2>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Setiap menu memiliki halaman khusus beserta penjelasan 1 paragraf dan daftar dokumen.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            ${menusData.map(menu => `
+                                <div onclick="navigateTo('${menu.id}')" class="group cursor-pointer bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between gap-3 mb-4">
+                                                <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center text-lg transition-colors">
+                                                <i class="fa-solid ${menu.icon}"></i>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                ${menu.items.length > 0 ? `
+                                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/90 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold">
+                                                        ${menu.items.length} Tautan
+                                                    </span>
+                                                ` : `
+                                                    <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 text-[11px] font-medium">
+                                                        Segera Hadir
+                                                    </span>
+                                                `}
+                                                <span class="text-xs font-display font-extrabold text-slate-300 dark:text-slate-700">#${menu.number}</span>
+                                            </div>
+                                        </div>
+
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">${menu.category}</span>
+                                        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition mt-0.5 mb-2">
+                                            ${menu.title}
+                                        </h3>
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                                            ${menu.description}
+                                        </p>
+                                    </div>
+
+                                    <div class="pt-4 mt-5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                                        <span>Buka Halaman Menu</span>
+                                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                </div>
+            `;
+        }
+
+        // Render Halaman Detail untuk Setiap Menu
+        function renderMenuDetailView(menu) {
+            const currentIndex = menusData.findIndex(m => m.id === menu.id);
+            const prevMenu = currentIndex > 0 ? menusData[currentIndex - 1] : null;
+            const nextMenu = currentIndex < menusData.length - 1 ? menusData[currentIndex + 1] : null;
+
+            return `
+                <div class="page-fade space-y-8">
+                    
+                    <!-- Header Banner Halaman Menu -->
+                    <div class="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-950 rounded-3xl p-6 sm:p-9 text-white shadow-lg relative overflow-hidden">
+                        <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-6 translate-y-6">
+                            <i class="fa-solid ${menu.icon} text-[150px]"></i>
+                        </div>
+                        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div class="space-y-2.5 max-w-3xl">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="px-3 py-1 rounded-full bg-amber-400 text-slate-950 font-bold text-xs">Menu ${menu.number} dari 13</span>
+                                    <span class="px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-medium">${menu.category}</span>
+                                </div>
+                                <h1 class="font-display font-extrabold text-2xl sm:text-4xl tracking-tight">${menu.title}</h1>
+                                <p class="text-xs sm:text-sm text-blue-200">Sekolah Model SDN 011 Balikpapan Tengah &bull; Portofolio Implementasi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Penjelasan 1 Paragraf Sesuai Dokumen Sekolah Model -->
+                    <section class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Deskripsi Komponen Sekolah Model</span>
+                                <h2 class="font-display font-bold text-lg text-slate-900 dark:text-white">Penjelasan Menu ${menu.title}</h2>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-5 sm:p-6 rounded-2xl border-l-4 border-blue-600 text-justify">
+                            ${menu.description}
+                        </p>
+
+                        <!-- Fokus Utama / Highlights -->
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Fokus & Indikator Keterlaksanaan:</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                ${menu.highlights.map(hl => `
+                                    <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
+                                        <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                        <span>${hl}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Daftar Dokumen, Presentasi, & Video pada Menu Ini -->
+                    <section class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Bukti Fisik & Dokumentasi Digital</span>
+                                <h2 class="font-display font-bold text-xl text-slate-900 dark:text-white">Daftar Dokumen & Video (${menu.items.length})</h2>
+                            </div>
+                        </div>
+
+                        ${menu.items.length > 0 ? `
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                ${menu.items.map((item, idx) => renderDocumentCard(item, idx + 1)).join('')}
+                            </div>
+                        ` : `
+                            <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-8 sm:p-12 text-center max-w-2xl mx-auto my-4">
+                                <div class="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl mx-auto mb-4">
+                                    <i class="fa-solid fa-folder-open"></i>
+                                </div>
+                                <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Dokumentasi ${menu.title}</h3>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
+                                    Penjelasan komponen <strong>${menu.title}</strong> telah tersedia di atas. Dokumen bukti fisik pada menu ini dikelola secara resmi oleh Tim Pengembang Sekolah Model SDN 011 Balikpapan Tengah.
+                                </p>
+                            </div>
+                        `}
+                    </section>
+
+                    <!-- Navigasi Halaman Sebelumnya & Selanjutnya -->
+                    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        ${prevMenu ? `
+                            <button onclick="navigateTo('${prevMenu.id}')" class="w-full sm:w-auto flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition text-left">
+                                <i class="fa-solid fa-arrow-left text-slate-400"></i>
+                                <div>
+                                    <span class="block text-[10px] uppercase tracking-wider text-slate-400">Menu Sebelumnya</span>
+                                    <span class="font-display font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200">${prevMenu.number}. ${prevMenu.title}</span>
+                                </div>
+                            </button>
+                        ` : `
+                            <button onclick="navigateTo('beranda')" class="w-full sm:w-auto flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition text-left">
+                                <i class="fa-solid fa-house text-slate-400"></i>
+                                <div>
+                                    <span class="block text-[10px] uppercase tracking-wider text-slate-400">Kembali ke</span>
+                                    <span class="font-display font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200">Halaman Beranda</span>
+                                </div>
+                            </button>
+                        `}
+
+                        ${nextMenu ? `
+                            <button onclick="navigateTo('${nextMenu.id}')" class="w-full sm:w-auto flex items-center justify-end gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition text-right">
+                                <div>
+                                    <span class="block text-[10px] uppercase tracking-wider text-slate-400">Menu Selanjutnya</span>
+                                    <span class="font-display font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200">${nextMenu.number}. ${nextMenu.title}</span>
+                                </div>
+                                <i class="fa-solid fa-arrow-right text-blue-600"></i>
+                            </button>
+                        ` : `
+                            <button onclick="navigateTo('beranda')" class="w-full sm:w-auto flex items-center justify-end gap-3 p-4 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 transition text-right">
+                                <div>
+                                    <span class="block text-[10px] uppercase tracking-wider text-blue-200">Selesai Menjelajah</span>
+                                    <span class="font-display font-bold text-xs sm:text-sm">Kembali ke Beranda Utama</span>
+                                </div>
+                                <i class="fa-solid fa-house"></i>
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Kartu Dokumen / Video Individual
+        function renderDocumentCard(item, indexNum) {
+            const badgeInfo = getDocBadgeInfo(item.type);
+            const youtubeId = extractYouTubeId(item.url);
+
+            return `
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-lg transition flex flex-col justify-between gap-5">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl ${badgeInfo.bgClass} flex items-center justify-center text-xl shrink-0">
+                                    <i class="${badgeInfo.icon}"></i>
+                                </div>
+                                <div>
+                                    <span class="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${badgeInfo.pillClass}">
+                                        ${badgeInfo.label}
+                                    </span>
+                                    <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mt-1 leading-snug">
+                                        ${item.title}
+                                    </h3>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-slate-300 dark:text-slate-700">#0${indexNum}</span>
+                        </div>
+
+                        <p class="text-xs text-slate-500 dark:text-slate-400 pl-1">
+                            ${item.subtitle || 'Dokumen Resmi Portofolio Sekolah Model SDN 011 Balikpapan Tengah'}
+                        </p>
+
+                        ${youtubeId ? `
+                            <!-- Embedded YouTube Thumbnail Preview -->
+                            <div onclick="openPreviewModal('${escapeQuotes(item.title)}', '${item.url}', '${item.type}')" class="relative rounded-2xl overflow-hidden bg-slate-900 aspect-video cursor-pointer group border border-slate-200 dark:border-slate-800">
+                                <img src="https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg" alt="${escapeQuotes(item.title)}" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x340/1e293b/ffffff?text=Video+YouTube'">
+                                <div class="absolute inset-0 bg-slate-950/30 group-hover:bg-slate-950/10 transition flex items-center justify-center">
+                                    <div class="w-14 h-14 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-play text-lg ml-0.5"></i>
+                                    </div>
+                                </div>
+                                <span class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-slate-950/80 text-white text-[10px] font-semibold">
+                                    <i class="fa-brands fa-youtube text-rose-500 mr-1"></i> Putar Video
+                                </span>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center gap-2.5">
+                        <button onclick="openPreviewModal('${escapeQuotes(item.title)}', '${item.url}', '${item.type}')" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/70 text-blue-700 dark:text-blue-300 text-xs font-semibold flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>Pratinjau di Sini</span>
+                        </button>
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-xs transition">
+                            <span>Buka Tautan</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper Icon & Badge Berdasarkan Jenis Dokumen
+        function getDocBadgeInfo(type) {
+            switch (type) {
+                case 'presentation':
+                    return {
+                        label: 'Google Slides / Presentasi',
+                        icon: 'fa-solid fa-file-powerpoint text-amber-600 dark:text-amber-400',
+                        bgClass: 'bg-amber-50 dark:bg-amber-950/70',
+                        pillClass: 'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300'
+                    };
+                case 'document':
+                    return {
+                        label: 'Google Docs / Dokumen',
+                        icon: 'fa-solid fa-file-word text-blue-600 dark:text-blue-400',
+                        bgClass: 'bg-blue-50 dark:bg-blue-950/70',
+                        pillClass: 'bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300'
+                    };
+                case 'folder':
+                    return {
+                        label: 'Folder Google Drive',
+                        icon: 'fa-solid fa-folder-open text-indigo-600 dark:text-indigo-400',
+                        bgClass: 'bg-indigo-50 dark:bg-indigo-950/70',
+                        pillClass: 'bg-indigo-100 dark:bg-indigo-900/60 text-indigo-800 dark:text-indigo-300'
+                    };
+                case 'video':
+                    return {
+                        label: 'Video YouTube Kegiatan',
+                        icon: 'fa-brands fa-youtube text-rose-600 dark:text-rose-400',
+                        bgClass: 'bg-rose-50 dark:bg-rose-950/70',
+                        pillClass: 'bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-300'
+                    };
+                default:
+                    return {
+                        label: 'Google Drive / Dokumen Analisis',
+                        icon: 'fa-brands fa-google-drive text-emerald-600 dark:text-emerald-400',
+                        bgClass: 'bg-emerald-50 dark:bg-emerald-950/70',
+                        pillClass: 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300'
+                    };
+            }
+        }
+
+        function getDocTypeIcon(type) {
+            if (type === 'video') return 'fa-brands fa-youtube text-rose-500';
+            if (type === 'presentation') return 'fa-solid fa-file-powerpoint text-amber-500';
+            if (type === 'document') return 'fa-solid fa-file-word text-blue-500';
+            if (type === 'folder') return 'fa-solid fa-folder-open text-indigo-500';
+            return 'fa-brands fa-google-drive text-emerald-500';
+        }
+
+        // Konversi URL Google Drive / Docs / Slides / Folder / YouTube ke Embed URL untuk Pratinjau
+        function getEmbedUrl(url) {
+            if (!url) return '';
+            const ytId = extractYouTubeId(url);
+            if (ytId) {
+                return `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+            }
+
+            // Google Drive Folder conversion to embeddedfolderview
+            const folderMatch = url.match(/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/);
+            if (folderMatch) {
+                return `https://drive.google.com/embeddedfolderview?id=${folderMatch[1]}#list`;
+            }
+
+            // Google Docs / Slides / Drive / File conversion to /preview
+            if (url.includes('docs.google.com') || url.includes('drive.google.com')) {
+                return url.replace(/\/edit.*$/, '/preview').replace(/\/view.*$/, '/preview');
+            }
+            return url;
+        }
+
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/);
+            if (shortsMatch) return shortsMatch[1];
+            const regMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+            if (regMatch) return regMatch[1];
+            return null;
+        }
+
+        function escapeQuotes(str) {
+            return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        // Modal Pratinjau Dokumen / Video
+        function openPreviewModal(title, url, type) {
+            const modal = document.getElementById('previewModal');
+            const titleEl = document.getElementById('previewModalTitle');
+            const badgeEl = document.getElementById('previewModalBadge');
+            const iframeEl = document.getElementById('previewIframe');
+            const externalEl = document.getElementById('previewExternalLink');
+            const loadingEl = document.getElementById('previewLoading');
+
+            const badgeInfo = getDocBadgeInfo(type);
+            titleEl.textContent = title;
+            badgeEl.textContent = badgeInfo.label;
+            externalEl.href = url;
+
+            loadingEl.classList.remove('hidden');
+            iframeEl.src = getEmbedUrl(url);
+            modal.classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            const modal = document.getElementById('previewModal');
+            const iframeEl = document.getElementById('previewIframe');
+            iframeEl.src = '';
+            modal.classList.add('hidden');
+        }
+
+        // Modal Statistik Pengunjung
+        function openVisitorModal() {
+            document.getElementById('visitorModal').classList.remove('hidden');
+        }
+
+        function closeVisitorModal() {
+            document.getElementById('visitorModal').classList.add('hidden');
+        }
+
+        // Universal Sidebar Toggle (Works on Laptop/Desktop & Mobile)
+        let isSidebarOpen = window.innerWidth >= 1024;
+
+        function setSidebarState(open) {
+            isSidebarOpen = open;
+            const sidebar = document.getElementById('sidebar');
+            const mainWrapper = document.getElementById('mainWrapper');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const toggleText = document.getElementById('sidebarToggleText');
+
+            if (open) {
+                sidebar.classList.remove('-translate-x-full', 'lg:-translate-x-full');
+                sidebar.classList.add('translate-x-0', 'lg:translate-x-0');
+                mainWrapper.classList.add('lg:pl-80');
+                if (window.innerWidth < 1024) {
+                    backdrop.classList.remove('hidden');
+                } else {
+                    backdrop.classList.add('hidden');
+                }
+                if (toggleText) toggleText.textContent = 'Tutup Menu';
+            } else {
+                sidebar.classList.remove('translate-x-0', 'lg:translate-x-0');
+                sidebar.classList.add('-translate-x-full', 'lg:-translate-x-full');
+                mainWrapper.classList.remove('lg:pl-80');
+                backdrop.classList.add('hidden');
+                if (toggleText) toggleText.textContent = 'Buka Menu';
+            }
+        }
+
+        function toggleSidebar() {
+            setSidebarState(!isSidebarOpen);
+        }
+
+        window.addEventListener('resize', () => {
+            const backdrop = document.getElementById('sidebarBackdrop');
+            if (window.innerWidth >= 1024) {
+                backdrop.classList.add('hidden');
+            } else if (isSidebarOpen) {
+                backdrop.classList.remove('hidden');
+            }
+        });
+
+        // Dark / Light Mode Toggle
+        function toggleTheme() {
+            const htmlEl = document.documentElement;
+            const iconEl = document.getElementById('themeIcon');
+            htmlEl.classList.toggle('dark');
+
+            if (htmlEl.classList.contains('dark')) {
+                iconEl.className = 'fa-solid fa-sun text-sm';
+            } else {
+                iconEl.className = 'fa-solid fa-moon text-sm';
+            }
+        }
+
+        // Toast Feedback
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        // Expose functions to global window scope for inline HTML onclick handlers
+        window.navigateTo = navigateTo;
+        window.filterSidebarMenus = filterSidebarMenus;
+        window.openPreviewModal = openPreviewModal;
+        window.closePreviewModal = closePreviewModal;
+        window.openVisitorModal = openVisitorModal;
+        window.closeVisitorModal = closeVisitorModal;
+        window.toggleSidebar = toggleSidebar;
+        window.toggleMobileSidebar = toggleSidebar;
+        window.toggleTheme = toggleTheme;
+
+        // Start App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            setSidebarState(window.innerWidth >= 1024);
+            navigateTo('beranda');
+            initRealTimeSystem();
+        });
+    </script>
+</body>
+</html>
